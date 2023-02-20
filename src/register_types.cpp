@@ -16,8 +16,6 @@
 #include <godot_cpp/classes/window.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 
-#include "test_node.h"
-#include "ros_executor.h"
 #include "laserscan_visualizer.h"
 
 using namespace godot;
@@ -31,9 +29,7 @@ void initialize_ros_module(ModuleInitializationLevel p_level) {
 	const char* dummy_args[1] = { "dummy" };
 	rclcpp::init(1, dummy_args);
 	
-	// ClassDB::register_class<RosExecutor>();
 	ClassDB::register_class<LaserScanVisualizer>();
-	// Engine::get_singleton()->register_singleton("GlobalRosExecutor", memnew(RosExecutor));
 }
 
 void uninitialize_ros_module(ModuleInitializationLevel p_level) {
@@ -41,7 +37,6 @@ void uninitialize_ros_module(ModuleInitializationLevel p_level) {
 		return;
 	}
 
-	// Engine::get_singleton()->unregister_singleton("GlobalRosExecutor");
 	rclcpp::shutdown();
 }
 

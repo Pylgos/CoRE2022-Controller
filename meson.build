@@ -2,9 +2,6 @@ project('godot-ros', 'cpp', default_options : ['cpp_std=c++17'])
 
 
 sources = [
-  'src/ros_node.cpp',
-  'src/ros_executor.cpp',
-  'src/test_node.cpp',
   'src/laserscan_visualizer.cpp',
   'src/register_types.cpp'
 ]
