@@ -13,9 +13,11 @@
       cellsFrom = ./nix;
       cellBlocks = with std.blockTypes; [
         (installables "packages")
+        (devshells "devshells")
       ];
     }
     {
       packages = std.harvest self [ "project" "packages" ];
+      devShells = std.harvest self [ "project" "devshells" ];
     };
 }

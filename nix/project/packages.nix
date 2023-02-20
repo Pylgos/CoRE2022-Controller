@@ -6,13 +6,7 @@ let
   godot = inputs.nix-godot-custom.godot.packages.godot-camera-branch;
   rosPkgs = inputs.ros2nix.humble.packages;
 in {
-  default = nixpkgs.mkShell {
-    nativeBuildInputs = [
-      godot
-    ];
-  };
-
-  gdextension = nixpkgs.stdenv.mkDerivation {
+  godot-ros = nixpkgs.stdenv.mkDerivation {
     pname = "godot-ros";
     version = "0.1.0";
 
