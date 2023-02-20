@@ -17,11 +17,14 @@ in
       ninja
     ];
 
-
     buildInputs = [
       godot.godot-cpp
       rosPkgs.rclcpp
       rosPkgs.sensor_msgs
     ];
+
+    shellHook = ''
+      alias intel-godot='nixGL nixVulkanIntel godot'
+    '';
   };
 }
