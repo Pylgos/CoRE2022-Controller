@@ -10,15 +10,12 @@ config_version=5
 
 [application]
 
-config/name="Ui"
+config/name="godot-ros-test"
 run/main_scene="res://main.tscn"
-config/features=PackedStringArray("4.0", "Mobile")
+config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
-[editor]
+[display]
 
-export/convert_text_resources_to_binary=true
-
-[rendering]
-
-renderer/rendering_method="mobile"
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
