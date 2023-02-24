@@ -3,34 +3,15 @@
 #include <godot_cpp/classes/node.hpp>
 #include <rclcpp/executors.hpp>
 #include <random>
+#include "ros_node.h"
 
 
 using namespace godot;
 using sensor_msgs::msg::LaserScan;
 
 
-static std::string random_string(std::string::size_type length)
-{
-    static auto& chrs = "0123456789"
-        "abcdefghijklmnopqrstuvwxyz"
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    thread_local static std::mt19937 rg{std::random_device{}()};
-    thread_local static std::uniform_int_distribution<std::string::size_type> pick(0, sizeof(chrs) - 2);
-
-    std::string s;
-
-    s.reserve(length);
-
-    while(length--)
-        s += chrs[pick(rg)];
-
-    return s;
-}
-
-
 LaserScanVisualizer::LaserScanVisualizer() {
-  node_ = std::make_shared<rclcpp::Node>("laser_scan_visualizer_" + random_string(5));
+  node_ = RosNode::get_singleton()->get_impl();
   set_topic_name("scan");
 }
 
@@ -142,7 +123,7 @@ void LaserScanVisualizer::_notification(int p_what) {
 
     case NOTIFICATION_INTERNAL_PHYSICS_PROCESS: {
       update_mesh();
-      rclcpp::spin_some(node_);
+      // rclcpp::spin_some(node_);
     } break;
   }
 }

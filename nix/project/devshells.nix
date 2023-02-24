@@ -21,10 +21,13 @@ in
       godot.godot-cpp
       rosPkgs.rclcpp
       rosPkgs.sensor_msgs
+      rosPkgs.lifecycle_msgs
+      nixpkgs.opentrack
+      nixpkgs.v4l-utils
     ];
 
     shellHook = ''
-      alias intel-godot='nixGL nixVulkanIntel godot'
+      alias godot='nixGLIntel nixVulkanIntel godot'
     '';
   };
 }
