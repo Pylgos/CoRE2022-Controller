@@ -1,19 +1,40 @@
-[gd_scene load_steps=9 format=3 uid="uid://qed3cb24wyp8"]
+[gd_scene load_steps=17 format=3 uid="uid://0lyd5dcenfnm"]
 
-[ext_resource type="Script" path="res://grid.gd" id="2_u8xjo"]
+[ext_resource type="Script" path="res://scripts/camera_feed_background.gd" id="1_3t8wh"]
+[ext_resource type="Script" path="res://scripts/camera_controller.gd" id="1_a2808"]
+[ext_resource type="Script" path="res://scripts/ammo_indicator.gd" id="1_hla1v"]
+[ext_resource type="FontFile" uid="uid://b3vu4xp3spbwn" path="res://fonts/DSEG7Modern-BoldItalic.ttf" id="1_lrehy"]
+[ext_resource type="Script" path="res://scripts/grid.gd" id="2_g8wdw"]
+[ext_resource type="Script" path="res://scripts/node_manager.gd" id="3_lyg8q"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dcva3"]
+[sub_resource type="LabelSettings" id="LabelSettings_uhsb4"]
+font = ExtResource("1_lrehy")
+font_size = 64
+font_color = Color(0.235294, 1, 0, 1)
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wyjqx"]
+font = ExtResource("1_lrehy")
+font_size = 64
+font_color = Color(0.407843, 0.407843, 0.407843, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_eo1fp"]
+font = ExtResource("1_lrehy")
+font_size = 32
+font_color = Color(0.623529, 0.623529, 0.623529, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ylehf"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_hklwl"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_45sjc"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_71s3o"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0r3cs"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0.662745, 0.662745, 0.662745, 0.5)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_5f8aw"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_72g4c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0liek"]
 
@@ -26,50 +47,150 @@ sky = SubResource("Sky_5ikp0")
 
 [node name="Node3D" type="Node3D"]
 
-[node name="RosCoordinate" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0, 0)
-
-[node name="LaserScanVisualizer" type="LaserScanVisualizer" parent="RosCoordinate"]
-material_override = SubResource("StandardMaterial3D_dcva3")
-mesh = SubResource("ImmediateMesh_hklwl")
-skeleton = NodePath("../..")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.942315, 0.334728, 0, -0.334728, 0.942315, 0, 2.50582, 8.05345)
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -365.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MiniMap" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
 offset_top = -293.0
-grow_horizontal = 0
+offset_right = 365.0
 grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control/MiniMap"]
 layout_mode = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="PanelContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="Control/MiniMap/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(365, 293)
 render_target_update_mode = 4
 
-[node name="Camera3D2" type="Camera3D" parent="PanelContainer/SubViewportContainer/SubViewport"]
+[node name="Camera3D2" type="Camera3D" parent="Control/MiniMap/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.1702, 0)
 projection = 1
 size = 20.0
 
+[node name="AmmoIndicator" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -168.0
+offset_top = -96.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_hla1v")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/AmmoIndicator"]
+layout_mode = 2
+
+[node name="Ammo" type="Label" parent="Control/AmmoIndicator/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "10"
+label_settings = SubResource("LabelSettings_uhsb4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slash" type="Label" parent="Control/AmmoIndicator/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "/"
+label_settings = SubResource("LabelSettings_wyjqx")
+vertical_alignment = 2
+
+[node name="MaxAmmo" type="Label" parent="Control/AmmoIndicator/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "40"
+label_settings = SubResource("LabelSettings_eo1fp")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="NodeManager" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -147.0
+offset_bottom = 97.0
+grow_horizontal = 0
+script = ExtResource("3_lyg8q")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/NodeManager"]
+layout_mode = 2
+
+[node name="CurrentState" type="Label" parent="Control/NodeManager/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "UNKNOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Control/NodeManager/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Activate" type="Button" parent="Control/NodeManager/VBoxContainer/Buttons"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Activate"
+
+[node name="Deactivate" type="Button" parent="Control/NodeManager/VBoxContainer/Buttons"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Deactivate"
+
+[node name="Configures" type="Button" parent="Control/NodeManager/VBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Configure"
+
+[node name="Cleanup" type="Button" parent="Control/NodeManager/VBoxContainer/Buttons"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cleanup"
+
+[node name="RosCoordinate" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0, 0)
+
+[node name="LaserScanVisualizer" type="LaserScanVisualizer" parent="RosCoordinate"]
+material_override = SubResource("StandardMaterial3D_ylehf")
+mesh = SubResource("ImmediateMesh_45sjc")
+skeleton = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.942315, 0.334728, 0, -0.334728, 0.942315, 0, 2.50582, 8.05345)
+script = ExtResource("1_a2808")
+
+[node name="CameraMonitor" type="Sprite3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
+script = ExtResource("1_3t8wh")
+
 [node name="Grid" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.672, 0)
-material_override = SubResource("StandardMaterial3D_71s3o")
-mesh = SubResource("ImmediateMesh_5f8aw")
-script = ExtResource("2_u8xjo")
+material_override = SubResource("StandardMaterial3D_0r3cs")
+mesh = SubResource("ImmediateMesh_72g4c")
+script = ExtResource("2_g8wdw")
 lines = 16
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
