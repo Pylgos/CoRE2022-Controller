@@ -7,7 +7,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
     var b = Basis.IDENTITY \
         .rotated(Vector3.FORWARD, OpenTrack.rpy.x) \
         .rotated(Vector3.LEFT, OpenTrack.rpy.y) \

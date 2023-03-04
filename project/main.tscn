@@ -23,18 +23,18 @@ font = ExtResource("1_lrehy")
 font_size = 32
 font_color = Color(0.623529, 0.623529, 0.623529, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ylehf"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p6a0d"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_45sjc"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_nclfg"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0r3cs"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aop7d"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0.662745, 0.662745, 0.662745, 0.5)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_72g4c"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_qeiwj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0liek"]
 
@@ -174,12 +174,12 @@ text = "Cleanup"
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0, 0)
 
 [node name="LaserScanVisualizer" type="LaserScanVisualizer" parent="RosCoordinate"]
-material_override = SubResource("StandardMaterial3D_ylehf")
-mesh = SubResource("ImmediateMesh_45sjc")
+material_override = SubResource("StandardMaterial3D_p6a0d")
+mesh = SubResource("ImmediateMesh_nclfg")
 skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.942315, 0.334728, 0, -0.334728, 0.942315, 0, 2.50582, 8.05345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 8.053)
 script = ExtResource("1_a2808")
 
 [node name="CameraMonitor" type="Sprite3D" parent="Camera3D"]
@@ -187,9 +187,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
 script = ExtResource("1_3t8wh")
 
 [node name="Grid" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.672, 0)
-material_override = SubResource("StandardMaterial3D_0r3cs")
-mesh = SubResource("ImmediateMesh_72g4c")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_aop7d")
+mesh = SubResource("ImmediateMesh_qeiwj")
 script = ExtResource("2_g8wdw")
 lines = 16
 

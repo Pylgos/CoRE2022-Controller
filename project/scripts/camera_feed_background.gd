@@ -31,7 +31,15 @@ func update_cameras(_id := -1) -> void:
 func activate_feed(feed: CameraFeed) -> void:
     var tex := CameraTexture.new()
     tex.set_camera_feed_id(feed.get_id())
-    feed.set_format(1, {})
+    var format_idx = 0
+    var formats = feed.get_formats()
+    for i in len(formats):
+        var format = formats[i]
+        print(format)
+        if format["width"] == 1280 and format["height"] == 720 and format["format"] == "Motion-JPEG" and format["frame_denominator"] == 30:
+            format_idx = i
+    print(format_idx)
+    feed.set_format(format_idx, {})
     texture = tex
     _current_camera_feed = feed
     feed.frame_changed.connect(fit_screen, CONNECT_ONE_SHOT)

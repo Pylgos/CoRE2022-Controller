@@ -2,14 +2,13 @@ extends Node
 
 
 var _server := UDPServer.new()
-var _buf := StreamPeerBuffer.new()
 
 var pos: Vector3
 var rpy: Vector3
 
 var _joy_id := -1
 
-func detect_opentrack():
+func detect_opentrack(_device := -1, _connected := false):
     for id in Input.get_connected_joypads():
         if "opentrack headpose" == Input.get_joy_name(id):
             _joy_id = id
@@ -21,7 +20,7 @@ func _ready() -> void:
     detect_opentrack()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
     if _joy_id == -1: return
     rpy.z = -Input.get_joy_axis(_joy_id, 3)
     rpy.y = -Input.get_joy_axis(_joy_id, 4)

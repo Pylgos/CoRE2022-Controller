@@ -123,7 +123,6 @@ void LaserScanVisualizer::_notification(int p_what) {
 
     case NOTIFICATION_INTERNAL_PHYSICS_PROCESS: {
       update_mesh();
-      // rclcpp::spin_some(node_);
     } break;
   }
 }

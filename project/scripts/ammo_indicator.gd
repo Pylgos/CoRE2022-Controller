@@ -23,5 +23,5 @@ func update_label() -> void:
     _ammo_label.text = "%02d" % Robot.get_ammo()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
     pass

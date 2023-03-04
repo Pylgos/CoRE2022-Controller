@@ -25,9 +25,5 @@ in
       nixpkgs.opentrack
       nixpkgs.v4l-utils
     ];
-
-    shellHook = ''
-      alias godot='nixGLIntel nixVulkanIntel godot'
-    '';
   };
 }

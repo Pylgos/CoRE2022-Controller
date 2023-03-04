@@ -67,6 +67,3 @@ func _update_state() -> void:
 
     _current_state.text = state_str
     _current_state.self_modulate = state_color_table[state]
-
-func _process(delta: float) -> void:
-    pass
