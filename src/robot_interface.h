@@ -23,6 +23,9 @@ public:
   int get_ammo();
   void set_target_velocity(godot::Vector2 linear, real_t angular);
   void set_camera_angle(real_t pitch, real_t yaw);
+  void set_control(bool enable);
+  real_t get_camera_pitch();
+  real_t get_camera_yaw();
 
 protected:
   static void _bind_methods();
@@ -40,6 +43,8 @@ protected:
 
   rclcpp::Publisher<geometry_msgs::msg::Vector3>::SharedPtr camera_angle_pub_;
   geometry_msgs::msg::Vector3 camera_angle_;
+
+  bool control_enabled_;
 };
 
 #endif

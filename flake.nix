@@ -1,9 +1,9 @@
 {
   inputs = {
     std.url = "github:divnix/std";
-    std.inputs.nixpkgs.follows = "nix-godot-custom/nixpkgs";
-    nix-godot-custom.url = "github:Pylgos/nix-godot-custom";
-    nixpkgs.follows = "nix-godot-custom/nixpkgs";
+    std.inputs.nixpkgs.follows = "nix-godot/nixpkgs";
+    nix-godot.url = "github:Pylgos/nix-godot";
+    nixpkgs.follows = "nix-godot/nixpkgs";
     ros2nix.url = "github:Pylgos/ros2nix";
   };
 

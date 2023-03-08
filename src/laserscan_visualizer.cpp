@@ -3,6 +3,7 @@
 #include <godot_cpp/classes/node.hpp>
 #include <rclcpp/executors.hpp>
 #include <random>
+#include "godot_cpp/core/object.hpp"
 #include "ros_node.h"
 
 
@@ -10,7 +11,7 @@ using namespace godot;
 using sensor_msgs::msg::LaserScan;
 
 
-LaserScanVisualizer::LaserScanVisualizer() {
+LaserScanVisualizer::LaserScanVisualizer(): point_size_(0.05) {
   node_ = RosNode::get_singleton()->get_impl();
   set_topic_name("scan");
 }
@@ -38,13 +39,10 @@ void LaserScanVisualizer::_bind_methods() {
   ClassDB::bind_method(D_METHOD("get_topic_name"), &LaserScanVisualizer::get_topic_name);
   ADD_PROPERTY(PropertyInfo(Variant::STRING, "topic_name"), "set_topic_name", "get_topic_name");
 
-  // ClassDB::bind_method(D_METHOD("set_material"), &LaserScanVisualizer::set_material);
-  // ClassDB::bind_method(D_METHOD("get_material"), &LaserScanVisualizer::get_material);
-  // ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "material", PROPERTY_HINT_RESOURCE_TYPE, "BaseMaterial3D,ShaderMaterial"), "set_material", "get_material");
+  ClassDB::bind_method(D_METHOD("set_point_size"), &LaserScanVisualizer::set_point_size);
+  ClassDB::bind_method(D_METHOD("get_point_size"), &LaserScanVisualizer::get_point_size);
+  ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "point_size"), "set_point_size", "get_point_size");
 }
-
-// void LaserScanVisualizer::set_material(godot::Ref<godot::Material> material) { material_ = material; }
-// godot::Ref<godot::Material> LaserScanVisualizer::get_material() { return material_; }
 
 
 void LaserScanVisualizer::draw_octahedron(Vector3 pos, real_t size, Color color) {
@@ -104,7 +102,7 @@ void LaserScanVisualizer::update_mesh() {
 
     if (std::isnan(x) || std::isnan(y) || std::isinf(x) || std::isinf(y)) continue;
 
-    draw_octahedron(Vector3(x, y, 0), 0.05, Color(1, 0, 0));
+    draw_octahedron(Vector3(x, y, 0), point_size_, Color(1, 0, 0));
   }
   mesh_->surface_end();
 }
@@ -125,4 +123,12 @@ void LaserScanVisualizer::_notification(int p_what) {
       update_mesh();
     } break;
   }
+}
+
+void LaserScanVisualizer::set_point_size(real_t point_size) {
+  point_size_ = point_size;
+}
+
+real_t LaserScanVisualizer::get_point_size() {
+  return point_size_;
 }

@@ -5,7 +5,7 @@ let
   ros2nix = inputs.ros2nix;
   rosPkgs = ros2nix.legacyPackages.humble;
   nixpkgs = inputs.nixpkgs;
-  godot = inputs.nix-godot-custom.godot.packages.godot-camera-branch;
+  godot = inputs.nix-godot.godot.packages.godot-master;
   l = inputs.nixpkgs.lib // builtins;
 in
 {

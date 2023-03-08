@@ -1,53 +1,77 @@
-[gd_scene load_steps=17 format=3 uid="uid://0lyd5dcenfnm"]
+[gd_scene load_steps=28 format=3 uid="uid://cie8di44bh13u"]
 
-[ext_resource type="Script" path="res://scripts/camera_feed_background.gd" id="1_3t8wh"]
-[ext_resource type="Script" path="res://scripts/camera_controller.gd" id="1_a2808"]
+[ext_resource type="Script" path="res://scripts/minimap_controller.gd" id="1_hcwk0"]
 [ext_resource type="Script" path="res://scripts/ammo_indicator.gd" id="1_hla1v"]
 [ext_resource type="FontFile" uid="uid://b3vu4xp3spbwn" path="res://fonts/DSEG7Modern-BoldItalic.ttf" id="1_lrehy"]
 [ext_resource type="Script" path="res://scripts/grid.gd" id="2_g8wdw"]
+[ext_resource type="Texture2D" uid="uid://do66ljnjhwtwg" path="res://assets/robot.svg" id="3_er1y2"]
 [ext_resource type="Script" path="res://scripts/node_manager.gd" id="3_lyg8q"]
+[ext_resource type="Script" path="res://scripts/fov_visual.gd" id="5_f8klp"]
+[ext_resource type="Script" path="res://scripts/joy_indicator.gd" id="6_idiw1"]
+[ext_resource type="Script" path="res://scripts/input_manager.gd" id="6_lep7v"]
+[ext_resource type="Script" path="res://scripts/ruler.gd" id="7_xqwd1"]
+[ext_resource type="Script" path="res://scripts/camera_manager.gd" id="8_0sc02"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0d8he"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_ascyv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2y6b0"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_vs1mj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqbr5"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 0.5)
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_mbylb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_id41m"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 1, 0, 0.501961)
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_t2cls"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6k0nt"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_y3sgy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6g3or"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.00392157, 0.227451, 1, 1)
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_hdmxn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_aqj1j"]
+font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_uhsb4"]
 font = ExtResource("1_lrehy")
-font_size = 64
+font_size = 120
 font_color = Color(0.235294, 1, 0, 1)
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_wyjqx"]
 font = ExtResource("1_lrehy")
-font_size = 64
+font_size = 120
 font_color = Color(0.407843, 0.407843, 0.407843, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_eo1fp"]
 font = ExtResource("1_lrehy")
-font_size = 32
+font_size = 64
 font_color = Color(0.623529, 0.623529, 0.623529, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p6a0d"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_nclfg"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aop7d"]
-transparency = 1
-shading_mode = 0
-albedo_color = Color(0.662745, 0.662745, 0.662745, 0.5)
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_qeiwj"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0liek"]
-
-[sub_resource type="Sky" id="Sky_5ikp0"]
-sky_material = SubResource("ProceduralSkyMaterial_0liek")
-
-[sub_resource type="Environment" id="Environment_y1wqh"]
-background_mode = 2
-sky = SubResource("Sky_5ikp0")
-
-[node name="Node3D" type="Node3D"]
-
-[node name="Control" type="Control" parent="."]
+[node name="Node3D" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,49 +79,308 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MiniMap" type="PanelContainer" parent="Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -293.0
-offset_right = 365.0
-grow_vertical = 0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MiniMap" type="Panel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_hcwk0")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/MiniMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/MiniMap/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(638, 720)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport"]
+transform = Transform3D(-4.37114e-08, 1, 1.91069e-15, 4.37114e-08, 0, 1, 1, 4.37114e-08, -4.37114e-08, 0, 13.1702, 0)
+projection = 1
+size = 7.0
+
+[node name="RosCoordinate" type="Node3D" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0, 0)
+
+[node name="LaserScanVisualizer1" type="LaserScanVisualizer" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
+topic_name = "scan0"
+transform = Transform3D(-0.707107, -0.707107, -5.96046e-08, -0.707107, 0.707107, 5.96046e-08, 0, 1.19209e-07, -1, 0.5, 0.5, 0.1)
+material_override = SubResource("StandardMaterial3D_0d8he")
+mesh = SubResource("ImmediateMesh_ascyv")
+skeleton = NodePath("../../../../../..")
+
+[node name="LaserScanVisualizer2" type="LaserScanVisualizer" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
+topic_name = "scan1"
+transform = Transform3D(0.707107, 0.707107, -5.96046e-08, 0.707107, -0.707107, 5.96046e-08, -7.10543e-15, -4.93781e-08, -1, -0.5, -0.5, 0.1)
+material_override = SubResource("StandardMaterial3D_2y6b0")
+mesh = SubResource("ImmediateMesh_vs1mj")
+skeleton = NodePath("../../../../../..")
+
+[node name="XAxis" type="MeshInstance3D" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19249e-09, 0.1)
+material_override = SubResource("StandardMaterial3D_yqbr5")
+mesh = SubResource("ImmediateMesh_mbylb")
+skeleton = NodePath("../../../../../..")
+script = ExtResource("7_xqwd1")
+length = 10
+color = Color(1, 0, 0, 0.5)
+
+[node name="YAxis" type="MeshInstance3D" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.19249e-09, 0.1)
+material_override = SubResource("StandardMaterial3D_id41m")
+mesh = SubResource("ImmediateMesh_t2cls")
+skeleton = NodePath("../../../../..")
+script = ExtResource("7_xqwd1")
+length = 10
+color = Color(0, 1, 0, 0.501961)
+
+[node name="Grid" type="MeshInstance3D" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
+material_override = SubResource("StandardMaterial3D_6k0nt")
+mesh = SubResource("ImmediateMesh_y3sgy")
+skeleton = NodePath("../../../../../..")
+script = ExtResource("2_g8wdw")
+mode = 0
+lines = 12
+color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="RobotRect" type="Sprite3D" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
+transform = Transform3D(1, 0, 0, 0, 1, 5.56363e-08, 0, -5.56363e-08, 1, 0, 2.38498e-09, 0.2)
+texture = ExtResource("3_er1y2")
+
+[node name="FovVisual" type="MeshInstance3D" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
+material_override = SubResource("StandardMaterial3D_6g3or")
+mesh = SubResource("ImmediateMesh_hdmxn")
+script = ExtResource("5_f8klp")
+length = 10
+color = Color(0.00392157, 0.227451, 1, 1)
+
+[node name="ZoomControl" type="VBoxContainer" parent="HBoxContainer/MiniMap"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -67.0
+offset_bottom = 141.0
+grow_horizontal = 0
+
+[node name="ZoomOut" type="Button" parent="HBoxContainer/MiniMap/ZoomControl"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "+"
+
+[node name="Range" type="Label" parent="HBoxContainer/MiniMap/ZoomControl"]
+layout_mode = 2
+text = "100"
+horizontal_alignment = 1
+
+[node name="ZoomIn" type="Button" parent="HBoxContainer/MiniMap/ZoomControl"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "-"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TabContainer" type="TabContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RobotNode" type="PanelContainer" parent="HBoxContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("3_lyg8q")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/RobotNode"]
+layout_mode = 2
+
+[node name="CurrentState" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/RobotNode/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "UNKNOWN"
+label_settings = SubResource("LabelSettings_aqj1j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/RobotNode/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Activate" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/RobotNode/VBoxContainer/Buttons"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Activate"
+
+[node name="Deactivate" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/RobotNode/VBoxContainer/Buttons"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Deactivate"
+
+[node name="Configures" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/RobotNode/VBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Configure"
+
+[node name="Cleanup" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/RobotNode/VBoxContainer/Buttons"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cleanup"
+
+[node name="InputManager" type="PanelContainer" parent="HBoxContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("6_lep7v")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager"]
+layout_mode = 2
+
+[node name="JoyIndicator" type="Control" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("6_idiw1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ActivateButton" type="CheckButton" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+button_pressed = true
+text = "Activate"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Max Linear Speed"
+
+[node name="MaxLinearSpeedLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0.0 m/s"
+
+[node name="MaxLinearSpeedSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+max_value = 5.0
+step = 0.0
+value = 2.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Max Angular Speed"
+
+[node name="MaxAngluarSpeedLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0.0 rad/s"
+
+[node name="MaxAngularSpeedSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+max_value = 5.0
+step = 0.0
+value = 2.0
+
+[node name="CameraManager" type="Panel" parent="HBoxContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+script = ExtResource("8_0sc02")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Control/MiniMap"]
+[node name="PitchLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-stretch = true
+text = "Pitch 1000 [deg]"
 
-[node name="SubViewport" type="SubViewport" parent="Control/MiniMap/SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(365, 293)
-render_target_update_mode = 4
+[node name="YawLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Yaw     0.0 [deg]"
 
-[node name="Camera3D2" type="Camera3D" parent="Control/MiniMap/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.1702, 0)
-projection = 1
-size = 20.0
+[node name="OpentrackControl" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="AmmoIndicator" type="PanelContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -168.0
-offset_top = -96.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/OpentrackControl"]
+layout_mode = 2
+text = "OpenTrack"
+
+[node name="OpentrackEnableButton" type="CheckButton" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/OpentrackControl"]
+layout_mode = 2
+text = "Enable"
+
+[node name="OpentrackState" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/OpentrackControl"]
+layout_mode = 2
+text = "Opentrack State"
+
+[node name="RunOpentrackButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/OpentrackControl"]
+layout_mode = 2
+text = "Run Opentrack"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Presets"
+
+[node name="PresetsContainer" type="HFlowContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AmmoIndicator" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 script = ExtResource("1_hla1v")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/AmmoIndicator"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/AmmoIndicator"]
 layout_mode = 2
 
-[node name="Ammo" type="Label" parent="Control/AmmoIndicator/HBoxContainer"]
+[node name="Ammo" type="Label" parent="HBoxContainer/VBoxContainer/AmmoIndicator/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -106,92 +389,20 @@ label_settings = SubResource("LabelSettings_uhsb4")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Slash" type="Label" parent="Control/AmmoIndicator/HBoxContainer"]
+[node name="Slash" type="Label" parent="HBoxContainer/VBoxContainer/AmmoIndicator/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "/"
 label_settings = SubResource("LabelSettings_wyjqx")
+horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="MaxAmmo" type="Label" parent="Control/AmmoIndicator/HBoxContainer"]
+[node name="MaxAmmo" type="Label" parent="HBoxContainer/VBoxContainer/AmmoIndicator/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 0.6
 text = "40"
 label_settings = SubResource("LabelSettings_eo1fp")
 horizontal_alignment = 1
 vertical_alignment = 2
-
-[node name="NodeManager" type="PanelContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -147.0
-offset_bottom = 97.0
-grow_horizontal = 0
-script = ExtResource("3_lyg8q")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/NodeManager"]
-layout_mode = 2
-
-[node name="CurrentState" type="Label" parent="Control/NodeManager/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "UNKNOWN"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Buttons" type="HBoxContainer" parent="Control/NodeManager/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Activate" type="Button" parent="Control/NodeManager/VBoxContainer/Buttons"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Activate"
-
-[node name="Deactivate" type="Button" parent="Control/NodeManager/VBoxContainer/Buttons"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Deactivate"
-
-[node name="Configures" type="Button" parent="Control/NodeManager/VBoxContainer/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Configure"
-
-[node name="Cleanup" type="Button" parent="Control/NodeManager/VBoxContainer/Buttons"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Cleanup"
-
-[node name="RosCoordinate" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0, 0)
-
-[node name="LaserScanVisualizer" type="LaserScanVisualizer" parent="RosCoordinate"]
-material_override = SubResource("StandardMaterial3D_p6a0d")
-mesh = SubResource("ImmediateMesh_nclfg")
-skeleton = NodePath("../..")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 8.053)
-script = ExtResource("1_a2808")
-
-[node name="CameraMonitor" type="Sprite3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
-script = ExtResource("1_3t8wh")
-
-[node name="Grid" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_aop7d")
-mesh = SubResource("ImmediateMesh_qeiwj")
-script = ExtResource("2_g8wdw")
-lines = 16
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_y1wqh")

@@ -17,6 +17,8 @@ public:
   void init(godot::String node_name);
   void spin_some();
 
+  static bool ok();
+
 protected:
   static RosNode* singleton_;
   static void _bind_methods();

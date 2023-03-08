@@ -1,5 +1,7 @@
 extends PanelContainer
 
+@export var state_color_unknown := Color.DARK_GRAY
+@export var state_color_node_not_found := Color.RED
 @export var state_color_active := Color.GREEN
 @export var state_color_inactive := Color.ORANGE
 @export var state_color_unconfigured := Color.GRAY
@@ -14,26 +16,28 @@ var _manager := LifecycleManager.new()
 @onready var _cleanup_button := $VBoxContainer/Buttons/Cleanup
 
 var state_color_table := {
+    LifecycleManager.UNKNOWN: state_color_unknown,
+    LifecycleManager.NODE_NOT_FOUND: state_color_node_not_found,
     LifecycleManager.ACTIVE: state_color_active,
     LifecycleManager.INACTIVE: state_color_inactive,
     LifecycleManager.UNCONFIGURED: state_color_unconfigured,
     LifecycleManager.FINALIZED: state_color_finalized,
 }
 
-var transition_button_table
+@onready var transition_button_table := {
+    _activate_button: LifecycleManager.ACTIVATE,
+    _deactivate_button: LifecycleManager.DEACTIVATE,
+    _configure_button: LifecycleManager.CONFIGURE,
+    _cleanup_button: LifecycleManager.CLEANUP,
+}
 
 
 func _ready() -> void:
-    _manager.init("can_proxy")
+    _manager.init("/can_proxy")
     _manager.state_changed.connect(_update_state)
-    transition_button_table = {
-        _activate_button: LifecycleManager.ACTIVATE,
-        _deactivate_button: LifecycleManager.DEACTIVATE,
-        _configure_button: LifecycleManager.CONFIGURE,
-        _cleanup_button: LifecycleManager.CLEANUP,
-    }
     for btn in transition_button_table.keys():
         btn.pressed.connect(_manager.make_transition.bind(transition_button_table[btn]))
+    _update_state()
 
 
 func _update_state() -> void:
@@ -60,6 +64,18 @@ func _update_state() -> void:
             _cleanup_button.hide()
         LifecycleManager.FINALIZED:
             state_str = "FINALIZED"
+            _deactivate_button.hide()
+            _activate_button.hide()
+            _configure_button.hide()
+            _cleanup_button.hide()
+        LifecycleManager.UNKNOWN:
+            state_str = "UNKNOWN"
+            _deactivate_button.hide()
+            _activate_button.hide()
+            _configure_button.hide()
+            _cleanup_button.hide()
+        LifecycleManager.NODE_NOT_FOUND:
+            state_str = "NO NODE FOUND"
             _deactivate_button.hide()
             _activate_button.hide()
             _configure_button.hide()

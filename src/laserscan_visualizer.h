@@ -31,6 +31,9 @@ protected:
 	void setup_subscription(std::string topic_name);
 	void set_topic_name(godot::String topic_name);
 	godot::String get_topic_name();
+	real_t point_size_;
+	void set_point_size(real_t point_size);
+	real_t get_point_size();
 
 	// void set_material(godot::Ref<godot::Material> material);
 	// godot::Ref<godot::Material> get_material();
