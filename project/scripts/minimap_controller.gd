@@ -27,7 +27,7 @@ func _draw() -> void:
     pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
     if zoom_in.button_pressed:
         set_view_range(view_range - zoom_rate * delta)
     if zoom_out.button_pressed:
