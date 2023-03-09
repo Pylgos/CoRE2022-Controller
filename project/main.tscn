@@ -347,7 +347,7 @@ layout_mode = 2
 [node name="DefaultPitchLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "Default PItch 0.0 [deg]"
+text = "Default Pitch 0.0 [deg]"
 
 [node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer"]
 layout_mode = 2
