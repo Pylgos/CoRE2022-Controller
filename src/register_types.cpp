@@ -19,6 +19,8 @@
 #include <random>
 
 #include "laserscan_visualizer.h"
+#include "rclcpp/init_options.hpp"
+#include "rclcpp/utilities.hpp"
 #include "ros_node.h"
 #include "src/lifecycle_manager.h"
 #include "src/robot_interface.h"
