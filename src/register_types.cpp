@@ -55,7 +55,8 @@ void initialize_ros_module(ModuleInitializationLevel p_level) {
 	}
 
 	const char* dummy_args[1] = { "dummy" };
-	rclcpp::init(1, dummy_args, rclcpp::InitOptions(), rclcpp::SignalHandlerOptions::None);
+	// I want to use rclcpp::SignalHandlerOptions::None. But I can't because this issue https://github.com/ros2/rclcpp/issues/2020 causes a crash on exit.
+	rclcpp::init(1, dummy_args, rclcpp::InitOptions(), rclcpp::SignalHandlerOptions::SigTerm);
 	
 	ClassDB::register_class<RosNode>();
 	ClassDB::register_class<LaserScanVisualizer>();
