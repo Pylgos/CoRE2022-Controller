@@ -13,45 +13,45 @@
 [ext_resource type="Script" path="res://scripts/camera_manager.gd" id="8_0sc02"]
 [ext_resource type="Script" path="res://scripts/camera_preset_manager.gd" id="10_klrun"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fvli0"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyb6m"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_ru6mr"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_ijc5q"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dr4do"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_derui"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_d4fef"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_c075b"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uw25r"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vu2mr"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(1, 0, 0, 0.5)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_1d6oh"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_lmg8k"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4eynw"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nblli"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 1, 0, 0.501961)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_3a450"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_0mlxm"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8dw1v"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fkp2"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0.301961, 0.301961, 0.301961, 1)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_fl8ek"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_ykbna"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60cgs"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6jhh0"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 1, 1, 1)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_oh6rd"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_b5ewn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_aqj1j"]
 font_size = 32
@@ -120,21 +120,21 @@ transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0, 0)
 [node name="LaserScanVisualizer1" type="LaserScanVisualizer" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
 topic_name = "scan0"
 transform = Transform3D(-0.707107, -0.707107, -5.96046e-08, -0.707107, 0.707107, 5.96046e-08, 0, 1.19209e-07, -1, 0.5, 0.5, 0.1)
-material_override = SubResource("StandardMaterial3D_fvli0")
-mesh = SubResource("ImmediateMesh_ru6mr")
+material_override = SubResource("StandardMaterial3D_wyb6m")
+mesh = SubResource("ImmediateMesh_ijc5q")
 skeleton = NodePath("../../../../../..")
 
 [node name="LaserScanVisualizer2" type="LaserScanVisualizer" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
 topic_name = "scan1"
 transform = Transform3D(0.707107, 0.707107, -5.96046e-08, 0.707107, -0.707107, 5.96046e-08, -7.10543e-15, -4.93781e-08, -1, -0.5, -0.5, 0.1)
-material_override = SubResource("StandardMaterial3D_dr4do")
-mesh = SubResource("ImmediateMesh_d4fef")
+material_override = SubResource("StandardMaterial3D_derui")
+mesh = SubResource("ImmediateMesh_c075b")
 skeleton = NodePath("../../../../../..")
 
 [node name="XAxis" type="MeshInstance3D" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19249e-09, 0.1)
-material_override = SubResource("StandardMaterial3D_uw25r")
-mesh = SubResource("ImmediateMesh_1d6oh")
+material_override = SubResource("StandardMaterial3D_vu2mr")
+mesh = SubResource("ImmediateMesh_lmg8k")
 skeleton = NodePath("../../../../../..")
 script = ExtResource("7_xqwd1")
 length = 10
@@ -142,16 +142,16 @@ color = Color(1, 0, 0, 0.5)
 
 [node name="YAxis" type="MeshInstance3D" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.19249e-09, 0.1)
-material_override = SubResource("StandardMaterial3D_4eynw")
-mesh = SubResource("ImmediateMesh_3a450")
+material_override = SubResource("StandardMaterial3D_nblli")
+mesh = SubResource("ImmediateMesh_0mlxm")
 skeleton = NodePath("../../../../..")
 script = ExtResource("7_xqwd1")
 length = 10
 color = Color(0, 1, 0, 0.501961)
 
 [node name="Grid" type="MeshInstance3D" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
-material_override = SubResource("StandardMaterial3D_8dw1v")
-mesh = SubResource("ImmediateMesh_fl8ek")
+material_override = SubResource("StandardMaterial3D_4fkp2")
+mesh = SubResource("ImmediateMesh_ykbna")
 skeleton = NodePath("../../../../../..")
 script = ExtResource("2_g8wdw")
 mode = 0
@@ -163,8 +163,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 5.56363e-08, 0, -5.56363e-08, 1, 0, 2.384
 texture = ExtResource("3_er1y2")
 
 [node name="FovVisual" type="MeshInstance3D" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
-material_override = SubResource("StandardMaterial3D_60cgs")
-mesh = SubResource("ImmediateMesh_oh6rd")
+material_override = SubResource("StandardMaterial3D_6jhh0")
+mesh = SubResource("ImmediateMesh_b5ewn")
 script = ExtResource("5_f8klp")
 length = 10
 color = Color(0, 1, 1, 1)
@@ -202,7 +202,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="RobotNode" type="PanelContainer" parent="HBoxContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("3_lyg8q")
@@ -309,6 +308,7 @@ step = 0.0
 value = 2.0
 
 [node name="CameraManager" type="Panel" parent="HBoxContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("8_0sc02")
 
@@ -371,6 +371,14 @@ text = "Opentrack State"
 [node name="RunOpentrackButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/OpentrackControl"]
 layout_mode = 2
 text = "Run Opentrack"
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Expand"
 
 [node name="DefaultPitchSlider" type="VSlider" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer"]
 layout_mode = 2

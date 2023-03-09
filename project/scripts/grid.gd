@@ -39,14 +39,18 @@ enum Mode {
 
 
 func _ready() -> void:
-    mesh = ImmediateMesh.new()
+    if mesh == null:
+        mesh = ImmediateMesh.new()
+    
+    if material_override == null:
+        material_override = StandardMaterial3D.new()
+    
     update_mesh()
 
 
 func update_mesh() -> void:
     mesh.clear_surfaces()
     mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-    material_override = StandardMaterial3D.new()
     material_override.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
     material_override.albedo_color = color
     material_override.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA

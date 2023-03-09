@@ -3,6 +3,8 @@
 #include <godot_cpp/classes/node.hpp>
 #include <rclcpp/executors.hpp>
 #include <random>
+#include "godot_cpp/classes/engine.hpp"
+#include "godot_cpp/classes/mesh.hpp"
 #include "godot_cpp/core/object.hpp"
 #include "ros_node.h"
 
@@ -110,8 +112,16 @@ void LaserScanVisualizer::update_mesh() {
 void LaserScanVisualizer::_notification(int p_what) {
   switch (p_what) {
     case NOTIFICATION_READY: {
-      mesh_.instantiate();
-      material_.instantiate();
+      if (get_mesh() == nullptr)
+        mesh_.instantiate();
+      else
+        mesh_ = get_mesh();
+      
+      if (get_material_override() == nullptr)
+        material_.instantiate();
+      else
+        material_ = get_material_override();
+
       material_->set_shading_mode(BaseMaterial3D::SHADING_MODE_UNSHADED);
       material_->set_flag(BaseMaterial3D::Flags::FLAG_ALBEDO_FROM_VERTEX_COLOR, true);
       set_material_override(material_);
