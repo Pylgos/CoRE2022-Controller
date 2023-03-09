@@ -9,6 +9,7 @@ extends Panel
 @onready var camera_preset_manager: VBoxContainer = $HBoxContainer/CameraPresetManager
 @onready var default_pitch_slider: VSlider = $HBoxContainer/DefaultPitchSlider
 @onready var default_pitch_label: Label = $HBoxContainer/VBoxContainer/VBoxContainer/DefaultPitchLabel
+@onready var expand_button: Button = $HBoxContainer/VBoxContainer/ExpandButton
 
 
 @onready var _default_camera_pitch := deg_to_rad(default_pitch_slider.value)
@@ -37,6 +38,10 @@ func _ready() -> void:
         _update_labels()
         if _using_default_pitch:
             Robot.set_camera_angle(_default_camera_pitch, Robot.get_camera_yaw())
+    )
+    
+    expand_button.pressed.connect(func():
+        Robot.expand_camera()
     )
 
 
