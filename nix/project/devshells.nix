@@ -22,6 +22,7 @@ in
       rosPkgs.rclcpp
       rosPkgs.sensor_msgs
       rosPkgs.lifecycle_msgs
+      rosPkgs.std_srvs
       nixpkgs.opentrack
       nixpkgs.v4l-utils
     ];

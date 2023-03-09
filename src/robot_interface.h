@@ -12,7 +12,7 @@
 #include <std_msgs/msg/int64.hpp>
 #include <geometry_msgs/msg/twist.hpp>
 #include "geometry_msgs/msg/vector3.hpp"
-// #include <lifecu
+#include <std_srvs/srv/set_bool.hpp>
 
 class RobotInterface : public godot::RefCounted {
   GDCLASS(RobotInterface, godot::RefCounted);
@@ -22,10 +22,15 @@ public:
   
   int get_ammo();
   void set_target_velocity(godot::Vector2 linear, real_t angular);
+  
   void set_camera_angle(real_t pitch, real_t yaw);
-  void set_control(bool enable);
   real_t get_camera_pitch();
   real_t get_camera_yaw();
+  
+  void set_control(bool enable);
+
+  void set_fire_command(bool enable);
+  bool get_fire_command();
 
 protected:
   static void _bind_methods();
@@ -43,6 +48,9 @@ protected:
 
   rclcpp::Publisher<geometry_msgs::msg::Vector3>::SharedPtr camera_angle_pub_;
   geometry_msgs::msg::Vector3 camera_angle_;
+
+  rclcpp::Client<std_srvs::srv::SetBool>::SharedPtr set_fire_command_cli_;
+  bool fire_command_;
 
   bool control_enabled_;
 };

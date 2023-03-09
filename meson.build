@@ -15,7 +15,8 @@ deps = [
   dependency('sensor_msgs'),
   dependency('std_msgs'),
   dependency('geometry_msgs'),
-  dependency('lifecycle_msgs')
+  dependency('lifecycle_msgs'),
+  dependency('std_srvs')
 ]
 
 lib = library('godot-ros', sources, dependencies: deps, install : true)

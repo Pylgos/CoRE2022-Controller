@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cie8di44bh13u"]
+[gd_scene load_steps=29 format=3 uid="uid://cie8di44bh13u"]
 
 [ext_resource type="Script" path="res://scripts/minimap_controller.gd" id="1_hcwk0"]
 [ext_resource type="Script" path="res://scripts/ammo_indicator.gd" id="1_hla1v"]
@@ -11,46 +11,47 @@
 [ext_resource type="Script" path="res://scripts/input_manager.gd" id="6_lep7v"]
 [ext_resource type="Script" path="res://scripts/ruler.gd" id="7_xqwd1"]
 [ext_resource type="Script" path="res://scripts/camera_manager.gd" id="8_0sc02"]
+[ext_resource type="Script" path="res://scripts/camera_preset_manager.gd" id="10_klrun"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0d8he"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fvli0"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_ascyv"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_ru6mr"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2y6b0"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dr4do"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_vs1mj"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_d4fef"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqbr5"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uw25r"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(1, 0, 0, 0.5)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_mbylb"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_1d6oh"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_id41m"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4eynw"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 1, 0, 0.501961)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_t2cls"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_3a450"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6k0nt"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8dw1v"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0.301961, 0.301961, 0.301961, 1)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_y3sgy"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_fl8ek"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6g3or"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60cgs"]
 transparency = 1
 shading_mode = 0
-albedo_color = Color(0.00392157, 0.227451, 1, 1)
+albedo_color = Color(0, 1, 1, 1)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_hdmxn"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_oh6rd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_aqj1j"]
 font_size = 32
@@ -119,21 +120,21 @@ transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0, 0)
 [node name="LaserScanVisualizer1" type="LaserScanVisualizer" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
 topic_name = "scan0"
 transform = Transform3D(-0.707107, -0.707107, -5.96046e-08, -0.707107, 0.707107, 5.96046e-08, 0, 1.19209e-07, -1, 0.5, 0.5, 0.1)
-material_override = SubResource("StandardMaterial3D_0d8he")
-mesh = SubResource("ImmediateMesh_ascyv")
+material_override = SubResource("StandardMaterial3D_fvli0")
+mesh = SubResource("ImmediateMesh_ru6mr")
 skeleton = NodePath("../../../../../..")
 
 [node name="LaserScanVisualizer2" type="LaserScanVisualizer" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
 topic_name = "scan1"
 transform = Transform3D(0.707107, 0.707107, -5.96046e-08, 0.707107, -0.707107, 5.96046e-08, -7.10543e-15, -4.93781e-08, -1, -0.5, -0.5, 0.1)
-material_override = SubResource("StandardMaterial3D_2y6b0")
-mesh = SubResource("ImmediateMesh_vs1mj")
+material_override = SubResource("StandardMaterial3D_dr4do")
+mesh = SubResource("ImmediateMesh_d4fef")
 skeleton = NodePath("../../../../../..")
 
 [node name="XAxis" type="MeshInstance3D" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19249e-09, 0.1)
-material_override = SubResource("StandardMaterial3D_yqbr5")
-mesh = SubResource("ImmediateMesh_mbylb")
+material_override = SubResource("StandardMaterial3D_uw25r")
+mesh = SubResource("ImmediateMesh_1d6oh")
 skeleton = NodePath("../../../../../..")
 script = ExtResource("7_xqwd1")
 length = 10
@@ -141,16 +142,16 @@ color = Color(1, 0, 0, 0.5)
 
 [node name="YAxis" type="MeshInstance3D" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.19249e-09, 0.1)
-material_override = SubResource("StandardMaterial3D_id41m")
-mesh = SubResource("ImmediateMesh_t2cls")
+material_override = SubResource("StandardMaterial3D_4eynw")
+mesh = SubResource("ImmediateMesh_3a450")
 skeleton = NodePath("../../../../..")
 script = ExtResource("7_xqwd1")
 length = 10
 color = Color(0, 1, 0, 0.501961)
 
 [node name="Grid" type="MeshInstance3D" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
-material_override = SubResource("StandardMaterial3D_6k0nt")
-mesh = SubResource("ImmediateMesh_y3sgy")
+material_override = SubResource("StandardMaterial3D_8dw1v")
+mesh = SubResource("ImmediateMesh_fl8ek")
 skeleton = NodePath("../../../../../..")
 script = ExtResource("2_g8wdw")
 mode = 0
@@ -162,11 +163,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 5.56363e-08, 0, -5.56363e-08, 1, 0, 2.384
 texture = ExtResource("3_er1y2")
 
 [node name="FovVisual" type="MeshInstance3D" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
-material_override = SubResource("StandardMaterial3D_6g3or")
-mesh = SubResource("ImmediateMesh_hdmxn")
+material_override = SubResource("StandardMaterial3D_60cgs")
+mesh = SubResource("ImmediateMesh_oh6rd")
 script = ExtResource("5_f8klp")
 length = 10
-color = Color(0.00392157, 0.227451, 1, 1)
+color = Color(0, 1, 1, 1)
 
 [node name="ZoomControl" type="VBoxContainer" parent="HBoxContainer/MiniMap"]
 layout_mode = 1
@@ -340,6 +341,17 @@ text = "Pitch 1000 [deg]"
 layout_mode = 2
 text = "Yaw     0.0 [deg]"
 
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DefaultPitchLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Default PItch 0.0 [deg]"
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="OpentrackControl" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -360,27 +372,65 @@ text = "Opentrack State"
 layout_mode = 2
 text = "Run Opentrack"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer"]
+[node name="DefaultPitchSlider" type="VSlider" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+min_value = -90.0
+max_value = 90.0
+step = 5.0
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer2"]
+[node name="CameraPresetManager" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("10_klrun")
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/CameraPresetManager"]
 layout_mode = 2
 text = "Presets"
 
-[node name="PresetsContainer" type="HFlowContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/CameraPresetManager"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/CameraPresetManager/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+text = "Left"
 
-[node name="AmmoIndicator" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/CameraPresetManager/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Front" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/CameraPresetManager/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Front"
+
+[node name="Rear" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/CameraPresetManager/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Rear"
+
+[node name="RightButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/CameraPresetManager/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Right"
+
+[node name="LauncherManager" type="Panel" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("1_hla1v")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/AmmoIndicator"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/LauncherManager"]
 layout_mode = 2
+offset_right = 638.0
+offset_bottom = 358.0
 
-[node name="Ammo" type="Label" parent="HBoxContainer/VBoxContainer/AmmoIndicator/HBoxContainer"]
+[node name="Ammo" type="Label" parent="HBoxContainer/VBoxContainer/LauncherManager/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -389,7 +439,7 @@ label_settings = SubResource("LabelSettings_uhsb4")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Slash" type="Label" parent="HBoxContainer/VBoxContainer/AmmoIndicator/HBoxContainer"]
+[node name="Slash" type="Label" parent="HBoxContainer/VBoxContainer/LauncherManager/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "/"
@@ -397,7 +447,7 @@ label_settings = SubResource("LabelSettings_wyjqx")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="MaxAmmo" type="Label" parent="HBoxContainer/VBoxContainer/AmmoIndicator/HBoxContainer"]
+[node name="MaxAmmo" type="Label" parent="HBoxContainer/VBoxContainer/LauncherManager/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -406,3 +456,16 @@ text = "40"
 label_settings = SubResource("LabelSettings_eo1fp")
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="FireCommandIndicator" type="ColorRect" parent="HBoxContainer/VBoxContainer/LauncherManager"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 177.0
+offset_top = 38.0
+offset_right = 239.0
+offset_bottom = 96.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+color = Color(0, 1, 0, 1)
