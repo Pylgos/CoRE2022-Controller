@@ -202,15 +202,15 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RobotNode" type="PanelContainer" parent="HBoxContainer/VBoxContainer/TabContainer"]
+[node name="RobotInterface" type="PanelContainer" parent="HBoxContainer/VBoxContainer/TabContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("3_lyg8q")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/RobotNode"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/RobotInterface"]
 layout_mode = 2
 
-[node name="CurrentState" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/RobotNode/VBoxContainer"]
+[node name="CurrentState" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/RobotInterface/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "UNKNOWN"
@@ -218,102 +218,102 @@ label_settings = SubResource("LabelSettings_aqj1j")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Buttons" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/RobotNode/VBoxContainer"]
+[node name="Buttons" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/RobotInterface/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Activate" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/RobotNode/VBoxContainer/Buttons"]
+[node name="Activate" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/RobotInterface/VBoxContainer/Buttons"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Activate"
 
-[node name="Deactivate" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/RobotNode/VBoxContainer/Buttons"]
+[node name="Deactivate" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/RobotInterface/VBoxContainer/Buttons"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Deactivate"
 
-[node name="Configures" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/RobotNode/VBoxContainer/Buttons"]
+[node name="Configures" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/RobotInterface/VBoxContainer/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Configure"
 
-[node name="Cleanup" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/RobotNode/VBoxContainer/Buttons"]
+[node name="Cleanup" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/RobotInterface/VBoxContainer/Buttons"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cleanup"
 
-[node name="InputManager" type="PanelContainer" parent="HBoxContainer/VBoxContainer/TabContainer"]
+[node name="Input" type="PanelContainer" parent="HBoxContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 script = ExtResource("6_lep7v")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/Input"]
 layout_mode = 2
 
-[node name="JoyIndicator" type="Control" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer"]
+[node name="JoyIndicator" type="Control" parent="HBoxContainer/VBoxContainer/TabContainer/Input/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("6_idiw1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/Input/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ActivateButton" type="CheckButton" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer"]
+[node name="ActivateButton" type="CheckButton" parent="HBoxContainer/VBoxContainer/TabContainer/Input/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 button_pressed = true
 text = "Activate"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/Input/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/Input/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Max Linear Speed"
 
-[node name="MaxLinearSpeedLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="MaxLinearSpeedLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/Input/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "0.0 m/s"
 
-[node name="MaxLinearSpeedSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer"]
+[node name="MaxLinearSpeedSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/TabContainer/Input/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 max_value = 5.0
 step = 0.0
 value = 2.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/Input/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/Input/HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Max Angular Speed"
 
-[node name="MaxAngluarSpeedLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="MaxAngluarSpeedLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/Input/HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "0.0 rad/s"
 
-[node name="MaxAngularSpeedSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/TabContainer/InputManager/HBoxContainer/VBoxContainer"]
+[node name="MaxAngularSpeedSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/TabContainer/Input/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 max_value = 5.0
 step = 0.0
 value = 2.0
 
-[node name="CameraManager" type="Panel" parent="HBoxContainer/VBoxContainer/TabContainer"]
+[node name="Camera" type="Panel" parent="HBoxContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 script = ExtResource("8_0sc02")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/Camera"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -325,63 +325,63 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PitchLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="PitchLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Pitch 1000 [deg]"
 
-[node name="YawLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="YawLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Yaw     0.0 [deg]"
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="DefaultPitchLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="DefaultPitchLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Default Pitch 0.0 [deg]"
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="OpentrackControl" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer"]
+[node name="OpentrackControl" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/OpentrackControl"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer/OpentrackControl"]
 layout_mode = 2
 text = "OpenTrack"
 
-[node name="OpentrackEnableButton" type="CheckButton" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/OpentrackControl"]
+[node name="OpentrackEnableButton" type="CheckButton" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer/OpentrackControl"]
 layout_mode = 2
 text = "Enable"
 
-[node name="OpentrackState" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/OpentrackControl"]
+[node name="OpentrackState" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer/OpentrackControl"]
 layout_mode = 2
 text = "Opentrack State"
 
-[node name="RunOpentrackButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer/OpentrackControl"]
+[node name="RunOpentrackButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer/OpentrackControl"]
 layout_mode = 2
 text = "Run Opentrack"
 
-[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ExpandButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/VBoxContainer"]
+[node name="ExpandButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Expand"
 
-[node name="DefaultPitchSlider" type="VSlider" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer"]
+[node name="DefaultPitchSlider" type="VSlider" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
@@ -389,42 +389,42 @@ min_value = -90.0
 max_value = 90.0
 step = 5.0
 
-[node name="CameraPresetManager" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer"]
+[node name="CameraPresetManager" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("10_klrun")
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/CameraPresetManager"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/CameraPresetManager"]
 layout_mode = 2
 text = "Presets"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/CameraPresetManager"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/CameraPresetManager"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="LeftButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/CameraPresetManager/HBoxContainer"]
+[node name="LeftButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/CameraPresetManager/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Left"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/CameraPresetManager/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/CameraPresetManager/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Front" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/CameraPresetManager/HBoxContainer/VBoxContainer"]
+[node name="Front" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/CameraPresetManager/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Front"
 
-[node name="Rear" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/CameraPresetManager/HBoxContainer/VBoxContainer"]
+[node name="Rear" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/CameraPresetManager/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Rear"
 
-[node name="RightButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/CameraManager/HBoxContainer/CameraPresetManager/HBoxContainer"]
+[node name="RightButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/CameraPresetManager/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Right"
