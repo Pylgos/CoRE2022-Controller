@@ -10,6 +10,7 @@
 #include "ros_node.h"
 #include "std_msgs/msg/detail/int64__struct.hpp"
 #include "std_srvs/srv/detail/set_bool__struct.hpp"
+#include "std_srvs/srv/detail/trigger__struct.hpp"
 #include <functional>
 
 using namespace godot;
@@ -19,6 +20,7 @@ using namespace placeholders;
 
 using geometry_msgs::msg::Twist;
 using std_srvs::srv::SetBool;
+using std_srvs::srv::Trigger;
 
 
 RobotInterface::RobotInterface() : ammo_{0}, fire_command_{false}, control_enabled_{true} {
@@ -37,6 +39,8 @@ RobotInterface::RobotInterface() : ammo_{0}, fire_command_{false}, control_enabl
 
   set_fire_command_cli_ = node_->create_client<SetBool>("set_fire_command");
   set_fire_command(false);
+
+  expand_camera_cli_ = node_->create_client<Trigger>("expand_camera");
 }
 
 void RobotInterface::set_control(bool enable) {
@@ -79,6 +83,15 @@ bool RobotInterface::get_fire_command() {
   return fire_command_;
 }
 
+void RobotInterface::expand_camera() {
+  auto req = make_shared<Trigger::Request>();
+  expand_camera_cli_->async_send_request(req, [](rclcpp::Client<Trigger>::SharedFuture fut) {
+    if (!fut.valid() || !fut.get()->success) {
+      UtilityFunctions::printerr("expand_camera request failed");
+    }
+  });
+}
+
 void RobotInterface::_bind_methods() {
   ClassDB::bind_method(D_METHOD("get_ammo"), &RobotInterface::get_ammo);
   ClassDB::bind_method(D_METHOD("set_target_velocity"), &RobotInterface::set_target_velocity);
@@ -88,6 +101,7 @@ void RobotInterface::_bind_methods() {
   ClassDB::bind_method(D_METHOD("get_camera_yaw"), &RobotInterface::get_camera_yaw);
   ClassDB::bind_method(D_METHOD("set_fire_command"), &RobotInterface::set_fire_command);
   ClassDB::bind_method(D_METHOD("get_fire_command"), &RobotInterface::get_fire_command);
+  ClassDB::bind_method(D_METHOD("expand_camera"), &RobotInterface::expand_camera);
 
   ADD_SIGNAL(MethodInfo("ammo_changed"));
   ADD_SIGNAL(MethodInfo("camera_angle_changed"));

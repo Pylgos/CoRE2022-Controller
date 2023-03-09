@@ -13,6 +13,7 @@
 #include <geometry_msgs/msg/twist.hpp>
 #include "geometry_msgs/msg/vector3.hpp"
 #include <std_srvs/srv/set_bool.hpp>
+#include <std_srvs/srv/trigger.hpp>
 
 class RobotInterface : public godot::RefCounted {
   GDCLASS(RobotInterface, godot::RefCounted);
@@ -31,6 +32,8 @@ public:
 
   void set_fire_command(bool enable);
   bool get_fire_command();
+
+  void expand_camera();
 
 protected:
   static void _bind_methods();
@@ -51,6 +54,8 @@ protected:
 
   rclcpp::Client<std_srvs::srv::SetBool>::SharedPtr set_fire_command_cli_;
   bool fire_command_;
+
+  rclcpp::Client<std_srvs::srv::Trigger>::SharedPtr expand_camera_cli_;
 
   bool control_enabled_;
 };
