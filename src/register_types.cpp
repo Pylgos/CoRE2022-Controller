@@ -53,7 +53,7 @@ void initialize_ros_module(ModuleInitializationLevel p_level) {
 	}
 
 	const char* dummy_args[1] = { "dummy" };
-	rclcpp::init(1, dummy_args);
+	rclcpp::init(1, dummy_args, rclcpp::InitOptions(), rclcpp::SignalHandlerOptions::None);
 	
 	ClassDB::register_class<RosNode>();
 	ClassDB::register_class<LaserScanVisualizer>();
