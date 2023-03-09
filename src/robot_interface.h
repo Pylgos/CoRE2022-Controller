@@ -14,6 +14,7 @@
 #include "geometry_msgs/msg/vector3.hpp"
 #include <std_srvs/srv/set_bool.hpp>
 #include <std_srvs/srv/trigger.hpp>
+#include <std_msgs/msg/float64.hpp>
 
 class RobotInterface : public godot::RefCounted {
   GDCLASS(RobotInterface, godot::RefCounted);
@@ -33,6 +34,12 @@ public:
   void set_fire_command(bool enable);
   bool get_fire_command();
 
+  void set_arm_lift_command(real_t command);
+  real_t get_arm_lift_command();
+
+  void set_arm_grabber_command(real_t command);
+  real_t get_arm_grabber_command();
+
   void expand_camera();
 
 protected:
@@ -51,6 +58,12 @@ protected:
 
   rclcpp::Publisher<geometry_msgs::msg::Vector3>::SharedPtr camera_angle_pub_;
   geometry_msgs::msg::Vector3 camera_angle_;
+
+  rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr arm_lift_cmd_pub_;
+  real_t arm_lift_cmd_;
+
+  rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr arm_grabber_cmd_pub_;
+  real_t arm_grabber_cmd_;
 
   rclcpp::Client<std_srvs::srv::SetBool>::SharedPtr set_fire_command_cli_;
   bool fire_command_;

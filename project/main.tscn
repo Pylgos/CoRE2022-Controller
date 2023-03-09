@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cie8di44bh13u"]
+[gd_scene load_steps=30 format=3 uid="uid://cie8di44bh13u"]
 
 [ext_resource type="Script" path="res://scripts/minimap_controller.gd" id="1_hcwk0"]
 [ext_resource type="Script" path="res://scripts/ammo_indicator.gd" id="1_hla1v"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://scripts/ruler.gd" id="7_xqwd1"]
 [ext_resource type="Script" path="res://scripts/camera_manager.gd" id="8_0sc02"]
 [ext_resource type="Script" path="res://scripts/camera_preset_manager.gd" id="10_klrun"]
+[ext_resource type="Script" path="res://scripts/torch_collector_manager.gd" id="11_agxjr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyb6m"]
 shading_mode = 0
@@ -427,6 +428,49 @@ text = "Rear"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Right"
+
+[node name="TorchCollector" type="Panel" parent="HBoxContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("11_agxjr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/TorchCollector"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LiftLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/TorchCollector/VBoxContainer"]
+layout_mode = 2
+text = "Lift"
+
+[node name="LiftButtons" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/TorchCollector/VBoxContainer"]
+layout_mode = 2
+
+[node name="LiftUpButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/TorchCollector/VBoxContainer/LiftButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "UP"
+
+[node name="LiftDownButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/TorchCollector/VBoxContainer/LiftButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "DOWN"
+
+[node name="GrabberLabel" type="Label" parent="HBoxContainer/VBoxContainer/TabContainer/TorchCollector/VBoxContainer"]
+layout_mode = 2
+text = "Grabber"
+
+[node name="GrabButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/TorchCollector/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "GRAB / RELEASE"
 
 [node name="LauncherManager" type="Panel" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
