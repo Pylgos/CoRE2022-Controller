@@ -72,7 +72,7 @@ void initialize_ros_module(ModuleInitializationLevel p_level) {
 	Engine::get_singleton()->register_singleton("Robot", memnew(RobotInterface));
 }
 
-void uninitialize_ros_module(ModuleInitializationLevel p_level) {
+void terminate_ros_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
@@ -88,7 +88,7 @@ GDExtensionBool GDE_EXPORT ros_library_init(const GDExtensionInterface *p_interf
 	godot::GDExtensionBinding::InitObject init_obj(p_interface, p_library, r_initialization);
 
 	init_obj.register_initializer(initialize_ros_module);
-	init_obj.register_terminator(uninitialize_ros_module);
+	init_obj.register_terminator(terminate_ros_module);
 	init_obj.set_minimum_library_initialization_level(MODULE_INITIALIZATION_LEVEL_SCENE);
 
 	return init_obj.init();
