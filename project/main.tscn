@@ -376,10 +376,19 @@ text = "Run Opentrack"
 [node name="HSeparator2" type="HSeparator" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ExpandButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="ExpandButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Expand"
+
+[node name="ShrinkButton" type="Button" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Shrink"
 
 [node name="DefaultPitchSlider" type="VSlider" parent="HBoxContainer/VBoxContainer/TabContainer/Camera/HBoxContainer"]
 layout_mode = 2
