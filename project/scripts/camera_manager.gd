@@ -35,7 +35,7 @@ func _ready() -> void:
     )
     
     default_pitch_slider.value_changed.connect(func(value):
-        _default_camera_pitch = deg_to_rad(value)
+        _default_camera_pitch = -deg_to_rad(value)
         _update_labels()
         if _using_default_pitch:
             Robot.set_camera_angle(_default_camera_pitch, Robot.get_camera_yaw())
@@ -101,3 +101,10 @@ func _input(_event: InputEvent) -> void:
         _using_default_pitch = false
     
     Robot.set_camera_lift_command(Input.get_axis("camera_shrink", "camera_expand"))
+
+func _process(delta: float) -> void:
+    var pitch_delta := Input.get_axis("look_up", "look_down") * delta
+    var yaw_delta := Input.get_axis("look_right", "look_left") * delta
+    _default_camera_pitch += pitch_delta
+    default_pitch_slider.value = -rad_to_deg(_default_camera_pitch)
+    Robot.set_camera_angle(_default_camera_pitch, Robot.get_camera_yaw() + yaw_delta)
