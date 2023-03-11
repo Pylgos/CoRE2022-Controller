@@ -40,7 +40,8 @@ public:
   void set_arm_grabber_command(real_t command);
   real_t get_arm_grabber_command();
 
-  void expand_camera();
+  void set_camera_lift_command(real_t command);
+  real_t get_camera_lift_command();
 
 protected:
   static void _bind_methods();
@@ -68,7 +69,8 @@ protected:
   rclcpp::Client<std_srvs::srv::SetBool>::SharedPtr set_fire_command_cli_;
   bool fire_command_;
 
-  rclcpp::Client<std_srvs::srv::Trigger>::SharedPtr expand_camera_cli_;
+  rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr camera_lift_cmd_pub_;
+  real_t camera_lift_cmd_;
 
   bool control_enabled_;
 };

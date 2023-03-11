@@ -6,6 +6,7 @@
 #include "rclcpp/create_subscription.hpp"
 #include "rclcpp/qos.hpp"
 #include "ros_node.h"
+#include "std_msgs/msg/detail/float64__struct.hpp"
 #include <functional>
 
 using namespace godot;
@@ -15,17 +16,17 @@ using namespace placeholders;
 
 using geometry_msgs::msg::Twist;
 using std_srvs::srv::SetBool;
-using std_srvs::srv::Trigger;
 using std_msgs::msg::Float64;
 
 
-RobotInterface::RobotInterface() : ammo_{0}, fire_command_{false}, control_enabled_{true} {
+RobotInterface::RobotInterface() : ammo_{0}, fire_command_{false}, camera_lift_cmd_{0}, control_enabled_{true} {
   node_ = RosNode::get_singleton()->get_impl();
   timer_ = node_->create_wall_timer(33ms, bind(&RobotInterface::timer_callback, this));
   target_vel_pub_ = node_->create_publisher<Twist>("target_vel", rclcpp::SystemDefaultsQoS());
   camera_angle_pub_ = node_->create_publisher<geometry_msgs::msg::Vector3>("camera_angle", rclcpp::SystemDefaultsQoS());
   arm_lift_cmd_pub_ = node_->create_publisher<Float64>("arm_lift_cmd", rclcpp::SystemDefaultsQoS());
   arm_grabber_cmd_pub_ = node_->create_publisher<Float64>("arm_grabber_cmd", rclcpp::SystemDefaultsQoS());
+  camera_lift_cmd_pub_ = node_->create_publisher<Float64>("camera_lift_cmd", rclcpp::SystemDefaultsQoS());
 
   ammo_sub_ = node_->create_subscription<std_msgs::msg::Int64>("ammo", rclcpp::SystemDefaultsQoS().reliable().transient_local(), [this](std_msgs::msg::Int64 msg){
     auto prev_ammo = ammo_;
@@ -37,8 +38,6 @@ RobotInterface::RobotInterface() : ammo_{0}, fire_command_{false}, control_enabl
 
   set_fire_command_cli_ = node_->create_client<SetBool>("set_fire_command");
   set_fire_command(false);
-
-  expand_camera_cli_ = node_->create_client<Trigger>("expand_camera");
 }
 
 void RobotInterface::set_control(bool enable) {
@@ -73,12 +72,20 @@ void RobotInterface::set_arm_lift_command(real_t command) {
   arm_lift_cmd_ = command;
 }
 
+void RobotInterface::set_camera_lift_command(real_t command) {
+  camera_lift_cmd_ = command;
+}
+
 real_t RobotInterface::get_arm_grabber_command() {
   return arm_grabber_cmd_;
 }
 
 real_t RobotInterface::get_arm_lift_command() {
   return arm_lift_cmd_;
+}
+
+real_t RobotInterface::get_camera_lift_command() {
+  return camera_lift_cmd_;
 }
 
 void RobotInterface::set_fire_command(bool enable) {
@@ -97,20 +104,10 @@ bool RobotInterface::get_fire_command() {
   return fire_command_;
 }
 
-void RobotInterface::expand_camera() {
-  auto req = make_shared<Trigger::Request>();
-  expand_camera_cli_->async_send_request(req, [](rclcpp::Client<Trigger>::SharedFuture fut) {
-    if (!fut.valid() || !fut.get()->success) {
-      UtilityFunctions::printerr("expand_camera request failed");
-    }
-  });
-}
-
 void RobotInterface::_bind_methods() {
   ClassDB::bind_method(D_METHOD("get_ammo"), &RobotInterface::get_ammo);
   ClassDB::bind_method(D_METHOD("set_target_velocity"), &RobotInterface::set_target_velocity);
   ClassDB::bind_method(D_METHOD("set_control"), &RobotInterface::set_control);
-  ClassDB::bind_method(D_METHOD("expand_camera"), &RobotInterface::expand_camera);
   
   ClassDB::bind_method(D_METHOD("set_camera_angle"), &RobotInterface::set_camera_angle);
   ClassDB::bind_method(D_METHOD("get_camera_pitch"), &RobotInterface::get_camera_pitch);
@@ -124,6 +121,9 @@ void RobotInterface::_bind_methods() {
   
   ClassDB::bind_method(D_METHOD("get_arm_lift_command"), &RobotInterface::get_arm_lift_command);
   ClassDB::bind_method(D_METHOD("set_arm_lift_command"), &RobotInterface::set_arm_lift_command);
+
+  ClassDB::bind_method(D_METHOD("get_camera_lift_command"), &RobotInterface::get_camera_lift_command);
+  ClassDB::bind_method(D_METHOD("set_camera_lift_command"), &RobotInterface::set_camera_lift_command);
 
   ADD_SIGNAL(MethodInfo("ammo_changed"));
   ADD_SIGNAL(MethodInfo("camera_angle_changed"));
@@ -141,4 +141,5 @@ void RobotInterface::timer_callback() {
   camera_angle_pub_->publish(camera_angle_);
   arm_grabber_cmd_pub_->publish(Float64().set__data(arm_grabber_cmd_));
   arm_lift_cmd_pub_->publish(Float64().set__data(arm_lift_cmd_));
+  camera_lift_cmd_pub_->publish(Float64().set__data(camera_lift_cmd_));
 }
