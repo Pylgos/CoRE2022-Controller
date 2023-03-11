@@ -59,7 +59,7 @@ void RobotInterface::set_target_velocity(godot::Vector2 linear, real_t angular) 
 
 void RobotInterface::set_camera_angle(real_t pitch, real_t yaw) {
   camera_angle_.y = pitch;
-  camera_angle_.z = yaw;
+  camera_angle_.z = Math::wrapf(yaw, -M_PI, M_PI);
   emit_signal("camera_angle_changed");
 }
 
