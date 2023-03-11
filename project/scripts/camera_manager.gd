@@ -100,5 +100,4 @@ func _input(_event: InputEvent) -> void:
         Robot.set_camera_angle(pitch, yaw)
         _using_default_pitch = false
     
-#    else:
-#        Robot.set_camera_angle(0.0, look_dir)
+    Robot.set_camera_lift_command(Input.get_axis("camera_shrink", "camera_expand"))
