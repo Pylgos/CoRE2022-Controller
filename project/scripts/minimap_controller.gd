@@ -9,7 +9,7 @@ extends Panel
 @onready var camera_3d: Camera3D = $SubViewportContainer/SubViewport/Camera3D
 
 
-var view_range := 16.0 : set = set_view_range
+var view_range := 8.0 : set = set_view_range
 
 
 func _ready() -> void:
@@ -21,7 +21,7 @@ func set_view_range(value: float) -> void:
     
     view_range = value
     range_label.text = "%3.1f m" % view_range
-    camera_3d.size = view_range
+    camera_3d.size = view_range * 2
 
 func _draw() -> void:
     pass
