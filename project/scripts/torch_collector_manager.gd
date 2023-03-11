@@ -26,6 +26,6 @@ func _ready() -> void:
         Robot.set_arm_grabber_command(0)
     )
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
     Robot.set_arm_lift_command(Input.get_axis("arm_shrink", "arm_expand"))
     Robot.set_arm_grabber_command(Input.get_action_strength("grab"))
