@@ -66,11 +66,11 @@ protected:
   rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr arm_grabber_cmd_pub_;
   real_t arm_grabber_cmd_;
 
-  rclcpp::Client<std_srvs::srv::SetBool>::SharedPtr set_fire_command_cli_;
-  bool fire_command_;
-
   rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr camera_lift_cmd_pub_;
   real_t camera_lift_cmd_;
+
+  rclcpp::Client<std_srvs::srv::SetBool>::SharedPtr set_fire_command_cli_;
+  bool fire_command_;
 
   bool control_enabled_;
 };

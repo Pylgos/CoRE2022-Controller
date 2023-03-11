@@ -19,7 +19,14 @@ using std_srvs::srv::SetBool;
 using std_msgs::msg::Float64;
 
 
-RobotInterface::RobotInterface() : ammo_{0}, fire_command_{false}, camera_lift_cmd_{0}, control_enabled_{true} {
+RobotInterface::RobotInterface()
+    : ammo_{0},
+      arm_lift_cmd_{0},
+      arm_grabber_cmd_{0},
+      camera_lift_cmd_{0},
+      fire_command_{false},
+      control_enabled_{true} {
+
   node_ = RosNode::get_singleton()->get_impl();
   timer_ = node_->create_wall_timer(33ms, bind(&RobotInterface::timer_callback, this));
   target_vel_pub_ = node_->create_publisher<Twist>("target_vel", rclcpp::SystemDefaultsQoS());
