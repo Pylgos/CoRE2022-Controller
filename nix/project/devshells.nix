@@ -23,6 +23,8 @@ in
       rosPkgs.sensor_msgs
       rosPkgs.lifecycle_msgs
       rosPkgs.std_srvs
+      rosPkgs.joy
+      rosPkgs.ros2run
       nixpkgs.opentrack
       nixpkgs.v4l-utils
     ];
