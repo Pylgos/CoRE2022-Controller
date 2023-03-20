@@ -43,6 +43,9 @@ public:
   void set_camera_lift_command(real_t command);
   real_t get_camera_lift_command();
 
+  void set_aps_enabled(bool enable);
+  bool get_aps_enabled();
+
 protected:
   static void _bind_methods();
   
@@ -71,6 +74,9 @@ protected:
 
   rclcpp::Client<std_srvs::srv::SetBool>::SharedPtr set_fire_command_cli_;
   bool fire_command_;
+
+  rclcpp::Client<std_srvs::srv::SetBool>::SharedPtr set_aps_enable_cli_;
+  bool aps_enabled_;
 
   bool control_enabled_;
 };

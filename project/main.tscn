@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cie8di44bh13u"]
+[gd_scene load_steps=31 format=3 uid="uid://cie8di44bh13u"]
 
 [ext_resource type="Script" path="res://scripts/minimap_controller.gd" id="1_hcwk0"]
 [ext_resource type="Script" path="res://scripts/ammo_indicator.gd" id="1_hla1v"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/camera_manager.gd" id="8_0sc02"]
 [ext_resource type="Script" path="res://scripts/camera_preset_manager.gd" id="10_klrun"]
 [ext_resource type="Script" path="res://scripts/torch_collector_manager.gd" id="11_agxjr"]
+[ext_resource type="Script" path="res://scripts/aps_control.gd" id="12_5yoi7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyb6m"]
 shading_mode = 0
@@ -481,6 +482,20 @@ text = "Grabber"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "GRAB / RELEASE"
+
+[node name="ApsControl" type="Panel" parent="HBoxContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("12_5yoi7")
+
+[node name="CheckButton" type="CheckButton" parent="HBoxContainer/VBoxContainer/TabContainer/ApsControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Enabled"
 
 [node name="LauncherManager" type="Panel" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2

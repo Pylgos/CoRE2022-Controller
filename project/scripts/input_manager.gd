@@ -35,8 +35,10 @@ func _update_max_angular_speed(value: float) -> void:
 
 
 func _input(_event: InputEvent) -> void:
+    pass
+func _process(_delta: float) -> void:
     var vx = Input.get_axis("backward", "forward") * _max_linear_speed
     var vy = Input.get_axis("right", "left") * _max_linear_speed
     var vang = Input.get_axis("turn_right", "turn_left") * _max_angular_speed
-    
+#    print(Vector2(vx, vy), " ", vang)
     Robot.set_target_velocity(Vector2(vx, vy), vang)

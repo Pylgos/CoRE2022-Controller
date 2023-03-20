@@ -31,7 +31,7 @@ func _update_fire_command_indicator() -> void:
     else:
         fire_command_indicator.color = Color.GREEN
 
-func _input(_event: InputEvent) -> void:
+func _process(_delta) -> void:
     if Input.is_action_just_pressed("fire"):
         Robot.set_fire_command(true)
     
