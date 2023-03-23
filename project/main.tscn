@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cie8di44bh13u"]
+[gd_scene load_steps=32 format=3 uid="uid://cie8di44bh13u"]
 
 [ext_resource type="Script" path="res://scripts/minimap_controller.gd" id="1_hcwk0"]
 [ext_resource type="Script" path="res://scripts/ammo_indicator.gd" id="1_hla1v"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/camera_preset_manager.gd" id="10_klrun"]
 [ext_resource type="Script" path="res://scripts/torch_collector_manager.gd" id="11_agxjr"]
 [ext_resource type="Script" path="res://scripts/aps_control.gd" id="12_5yoi7"]
+[ext_resource type="Script" path="res://scripts/joy.gd" id="13_7rnh0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyb6m"]
 shading_mode = 0
@@ -121,6 +122,7 @@ transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0, 0)
 
 [node name="LaserScanVisualizer1" type="LaserScanVisualizer" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
 topic_name = "scan0"
+point_size = 0.1
 transform = Transform3D(-0.707107, -0.707107, -5.96046e-08, -0.707107, 0.707107, 5.96046e-08, 0, 1.19209e-07, -1, 0.5, 0.5, 0.1)
 material_override = SubResource("StandardMaterial3D_wyb6m")
 mesh = SubResource("ImmediateMesh_ijc5q")
@@ -128,6 +130,7 @@ skeleton = NodePath("../../../../../..")
 
 [node name="LaserScanVisualizer2" type="LaserScanVisualizer" parent="HBoxContainer/MiniMap/SubViewportContainer/SubViewport/RosCoordinate"]
 topic_name = "scan1"
+point_size = 0.1
 transform = Transform3D(0.707107, 0.707107, -5.96046e-08, 0.707107, -0.707107, 5.96046e-08, -7.10543e-15, -4.93781e-08, -1, -0.5, -0.5, 0.1)
 material_override = SubResource("StandardMaterial3D_derui")
 mesh = SubResource("ImmediateMesh_c075b")
@@ -497,6 +500,11 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Enabled"
 
+[node name="Joy" type="Panel" parent="HBoxContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("13_7rnh0")
+
 [node name="LauncherManager" type="Panel" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -529,7 +537,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 0.6
-text = "40"
+text = "28"
 label_settings = SubResource("LabelSettings_eo1fp")
 horizontal_alignment = 1
 vertical_alignment = 2

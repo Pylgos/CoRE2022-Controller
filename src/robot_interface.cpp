@@ -6,7 +6,6 @@
 #include "rclcpp/create_subscription.hpp"
 #include "rclcpp/qos.hpp"
 #include "ros_node.h"
-#include "std_msgs/msg/detail/float64__struct.hpp"
 #include <functional>
 
 using namespace godot;
@@ -17,6 +16,7 @@ using namespace placeholders;
 using geometry_msgs::msg::Twist;
 using std_srvs::srv::SetBool;
 using std_msgs::msg::Float64;
+using sensor_msgs::msg::Joy;
 
 
 RobotInterface::RobotInterface()
@@ -30,6 +30,7 @@ RobotInterface::RobotInterface()
 
   node_ = RosNode::get_singleton()->get_impl();
   timer_ = node_->create_wall_timer(33ms, bind(&RobotInterface::timer_callback, this));
+  joy_pub_ = node_->create_publisher<Joy>("joy", rclcpp::SensorDataQoS());
   // target_vel_pub_ = node_->create_publisher<Twist>("target_vel", rclcpp::SystemDefaultsQoS());
   // camera_angle_pub_ = node_->create_publisher<geometry_msgs::msg::Vector3>("camera_angle", rclcpp::SystemDefaultsQoS());
   // arm_lift_cmd_pub_ = node_->create_publisher<Float64>("arm_lift_cmd", rclcpp::SystemDefaultsQoS());
@@ -131,6 +132,17 @@ bool RobotInterface::get_fire_command() {
   return fire_command_;
 }
 
+void RobotInterface::send_joy_message(PackedFloat32Array axes, PackedInt32Array buttons) {
+  Joy msg;
+  for (const auto axis : axes) {
+    msg.axes.push_back(axis);
+  }
+  for (const auto button : buttons) {
+    msg.buttons.push_back(button);
+  }
+  joy_pub_->publish(msg);
+}
+
 void RobotInterface::_bind_methods() {
   ClassDB::bind_method(D_METHOD("get_ammo"), &RobotInterface::get_ammo);
   ClassDB::bind_method(D_METHOD("set_target_velocity"), &RobotInterface::set_target_velocity);
@@ -155,6 +167,8 @@ void RobotInterface::_bind_methods() {
   ClassDB::bind_method(D_METHOD("get_aps_enabled"), &RobotInterface::get_aps_enabled);
   ClassDB::bind_method(D_METHOD("set_aps_enabled"), &RobotInterface::set_aps_enabled);
 
+  ClassDB::bind_method(D_METHOD("send_joy_message"), &RobotInterface::send_joy_message);
+
   ADD_SIGNAL(MethodInfo("ammo_changed"));
   ADD_SIGNAL(MethodInfo("camera_angle_changed"));
   ADD_SIGNAL(MethodInfo("fire_command_changed"));
@@ -167,6 +181,8 @@ int RobotInterface::get_ammo() {
 
 void RobotInterface::timer_callback() {
   if (!control_enabled_) return;
+
+
 
   // target_vel_pub_->publish(target_vel_);
   // camera_angle_pub_->publish(camera_angle_);

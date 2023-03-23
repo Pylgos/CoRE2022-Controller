@@ -1,6 +1,8 @@
 #ifndef GODOT_ROBOT_INTERFACE_H
 #define GODOT_ROBOT_INTERFACE_H
 
+#include "godot_cpp/variant/packed_float32_array.hpp"
+#include "godot_cpp/variant/packed_int32_array.hpp"
 #include "godot_cpp/variant/vector2.hpp"
 #include "rclcpp/client.hpp"
 #include "rclcpp/publisher.hpp"
@@ -15,6 +17,7 @@
 #include <std_srvs/srv/set_bool.hpp>
 #include <std_srvs/srv/trigger.hpp>
 #include <std_msgs/msg/float64.hpp>
+#include <sensor_msgs/msg/joy.hpp>
 
 class RobotInterface : public godot::RefCounted {
   GDCLASS(RobotInterface, godot::RefCounted);
@@ -45,6 +48,8 @@ public:
 
   void set_aps_enabled(bool enable);
   bool get_aps_enabled();
+
+  void send_joy_message(godot::PackedFloat32Array axes, godot::PackedInt32Array buttons);
 
 protected:
   static void _bind_methods();
@@ -77,6 +82,8 @@ protected:
 
   rclcpp::Client<std_srvs::srv::SetBool>::SharedPtr set_aps_enable_cli_;
   bool aps_enabled_;
+
+  rclcpp::Publisher<sensor_msgs::msg::Joy>::SharedPtr joy_pub_;
 
   bool control_enabled_;
 };
