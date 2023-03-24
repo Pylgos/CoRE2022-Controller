@@ -48,8 +48,8 @@ RobotInterface::RobotInterface()
   // set_fire_command_cli_ = node_->create_client<SetBool>("set_fire_cmd");
   // set_fire_command(false);
 
-  // set_aps_enable_cli_ = node_->create_client<SetBool>("enable_aps");
-  // set_aps_enabled(false);
+  set_aps_enable_cli_ = node_->create_client<SetBool>("enable_aps");
+  set_aps_enabled(false);
 }
 
 void RobotInterface::set_control(bool enable) {
@@ -113,15 +113,15 @@ void RobotInterface::set_fire_command(bool enable) {
 }
 
 void RobotInterface::set_aps_enabled(bool enable) {
-  // auto req = make_shared<SetBool::Request>();
-  // aps_enabled_ = enable;
-  // req->data = aps_enabled_;
-  // set_aps_enable_cli_->async_send_request(req, [](rclcpp::Client<SetBool>::SharedFuture fut) {
-  //   if (!fut.valid() || !fut.get()->success) {
-  //     UtilityFunctions::printerr("set_aps_enable request failed");
-  //   }
-  // });
-  // emit_signal("aps_state_changed");
+  auto req = make_shared<SetBool::Request>();
+  aps_enabled_ = enable;
+  req->data = aps_enabled_;
+  set_aps_enable_cli_->async_send_request(req, [](rclcpp::Client<SetBool>::SharedFuture fut) {
+    if (!fut.valid() || !fut.get()->success) {
+      UtilityFunctions::printerr("set_aps_enable request failed");
+    }
+  });
+  emit_signal("aps_state_changed");
 }
 
 bool RobotInterface::get_aps_enabled() {
