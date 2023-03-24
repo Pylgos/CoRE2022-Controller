@@ -509,6 +509,7 @@ script = ExtResource("13_7rnh0")
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("1_hla1v")
+max_ammo = 28
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/LauncherManager"]
 layout_mode = 2

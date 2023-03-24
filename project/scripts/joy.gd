@@ -3,6 +3,10 @@ extends Panel
 var _joy := -1
 var _touchpad := -1
 
+@onready var aps_control: Panel = $"../ApsControl"
+
+var _prev_touchpad_pressed := false
+
 func find_controller() -> void:
     for dev in Input.get_connected_joypads():
         var joy_name := Input.get_joy_name(dev)
@@ -51,6 +55,12 @@ func update() -> void:
     buttons.append(Input.is_joy_button_pressed(_touchpad, 2))
     
     Robot.send_joy_message(axes, buttons)
+    
+    @warning_ignore("int_as_enum_without_cast")
+    var is_touchpad_pressed := Input.is_joy_button_pressed(_touchpad, 2)
+    if not _prev_touchpad_pressed and is_touchpad_pressed:
+        aps_control.check_button.button_pressed = not aps_control.check_button.button_pressed
+    _prev_touchpad_pressed = is_touchpad_pressed
 
 func _input(event: InputEvent) -> void:
     var device_name := Input.get_joy_name(event.device)
