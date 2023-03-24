@@ -60,6 +60,7 @@ func update() -> void:
     var is_touchpad_pressed := Input.is_joy_button_pressed(_touchpad, 2)
     if not _prev_touchpad_pressed and is_touchpad_pressed:
         aps_control.check_button.button_pressed = not aps_control.check_button.button_pressed
+        aps_control.check_button.pressed.emit()
     _prev_touchpad_pressed = is_touchpad_pressed
 
 func _input(event: InputEvent) -> void:

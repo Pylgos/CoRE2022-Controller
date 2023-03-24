@@ -543,7 +543,7 @@ label_settings = SubResource("LabelSettings_eo1fp")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="FireCommandIndicator" type="ColorRect" parent="HBoxContainer/VBoxContainer/LauncherManager"]
+[node name="ApsIndicator" type="ColorRect" parent="HBoxContainer/VBoxContainer/LauncherManager"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
